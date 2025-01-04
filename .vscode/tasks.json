@@ -1,0 +1,38 @@
+{  
+    "version": "2.0.0",  
+    "tasks": [  
+        {  
+            "label": "build", // 任务的名称是“build”，在VSCode的任务列表中可以通过这个名称来识别和运行该任务。
+            "type": "shell",  // "shell"：指定任务的类型为shell命令，即在shell环境中执行指定的命令。
+            "command": "/usr/bin/g++",  // 使用g++进行编译和链接
+            "args": [  // 定义传递给g++编译器的命令行参数：
+                "-g",  // -g表示生成调试信息
+                "${file}", // 表示当前打开的文件路径，即正在编辑的源文件。
+                "-o", // 表示输出可执行文件
+                "${fileDirname}/${fileBasenameNoExtension}",  // 表示具体的可执行文件名字，
+                // 其中${fileDirname}:表示当前项目所在的路径，具体为：/home/chris/workspace/train_cpp
+
+                // 指定使用C++11标准进行编译。可以根据需要更改为其他标准，如-std=c++14、-std=c++17、-std=c++20、-std=c++23等。
+                "-std=c++11",  // 表示使用C++11标准，那么就可以表示14,17,20,23,
+                // "-I/usr/include",
+                // "-I/usr/local/include",
+                "-I./src/c++17", // 指定编译时的包含目录，即头文件搜索路径，这里指定为当前项目目录下的src/c++17文件夹。
+                "./src/c++17/*.cpp", // 指定要编译的源文件，这里表示编译src/c++17文件夹下的所有.cpp文件。
+                //"./*.cpp"
+                // "-I./src/task",
+                // "./src/task/*.cc",
+                // "-L/usr/local/lib",
+                // "-lboost_system",  
+                // "-lsqlite3",
+                // "-lpthread" // 注意这里应该是 -lpthread 而不是 -lthreads  
+            ],  
+            "group": {  // 定义任务的分组信息
+                "kind": "build",  // 将任务归类为构建任务，这样在VSCode的构建任务列表中可以更容易地找到和运行。
+                "isDefault": true  // 将该任务设置为默认构建任务，当运行构建任务时，如果没有指定具体任务名称，将自动运行这个任务。
+            },  
+            // 指定问题匹配器，用于解析编译器输出中的错误和警告信息，并在VSCode的问题面板中显示出来。
+            // "$gcc"是一个预定义的问题匹配器，专门用于匹配gcc/g++编译器的输出格式。
+            "problemMatcher": ["$gcc"]  
+        }  
+    ]  
+}

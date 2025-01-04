@@ -1,7 +1,41 @@
-{
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": []
+{  
+    "version": "0.2.0",  
+    "configurations": [  // 定义了一个调试配置数组，可以包含多个调试配置
+        {  
+            "name": "(gdb) Launch",  // 配置名称，在调试列表中显示
+            "type": "cppdbg",  // 指定调试类型为cppdbg，这是用于C++的调试器类型
+            "request": "launch",  // 请求类型为launch，表示启动一个新的调试会话。
+            // 指定要调试的程序路径，假设可执行文件与源文件在同一目录下。
+            // ${workspaceFolder}是工作区的根目录，
+            // ${fileBasenameNoExtension}是当前文件的名称（不包含扩展名）。
+            "program": "${workspaceFolder}/${fileBasenameNoExtension}", // 假设可执行文件与源文件在同一目录下  
+            "args": [ // 定义传递给程序的命令行参数
+                "-g", // 第一个参数
+                "${file}", // 第二个参数
+                "-o", // 第三个参数
+                "${fileDirname}/${fileBasenameNoExtension}", // 第4个参数
+                "-std=c++11", // 第5个参数
+                // "-I/usr/include",
+                // "-I./src/train",
+                // "-L/usr/local/lib",
+                // "-lboost_system",
+                // "-lpthread"
+            ],  
+            "stopAtEntry": false,  // 是否在程序的入口处停下来， false，表示不停下来
+            "cwd": "${workspaceFolder}",  // 指定程序的工作目录为工作区的根目录
+            "environment": [],  // 定义程序的环境变量，这里为空数组，表示不设置额外的环境变量。
+            "externalConsole": false,  // 指定是否在外部控制台中运行程序，默认为false，表示在VSCode的内置终端中运行。
+            "MIMode": "gdb",  // 指定使用的调试器为gdb
+            "setupCommands": [  // 定义调试器的初始化命令
+                {  
+                    "description": "Enable pretty-printing for gdb",  
+                    "text": "-enable-pretty-printing",  // 启用gdb的漂亮打印功能，即使命令失败也忽略错误。
+                    "ignoreFailures": true  
+                }  
+            ],  
+            // 指定在启动调试之前要运行的任务，这里与tasks.json中的label为“build”的任务匹配，表示先执行构建任务再进行调试.
+            "preLaunchTask": "build", 
+            // "console": "externalTerminal"
+        }  
+    ]  
 }
