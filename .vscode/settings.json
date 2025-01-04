@@ -40,17 +40,18 @@
         "**/build_debug_socket/**": true,
         "**/.metadata/**": true,
     },
-    // "clangd.arguments": [
-    //     "--background-index",
-    //     "--log=error",
-    //     "--header-insertion=never",
-    //     "--clang-tidy",
-    //     "--cross-file-rename=true"
-    // ],
-    // "clangd.path": "/usr/bin/clangd-11",
-    // "clangd.syncFileEvents": true,
-    // "C_Cpp.intelliSenseEngine": "Disabled",
-    // "C_Cpp.autocomplete": "Disabled",
+    "clangd.arguments": [
+        "--background-index",
+        "--log=error",
+        "--header-insertion=never",
+        "--clang-tidy",
+        "--cross-file-rename=true",
+        "--compile-commands-dir=${workspaceFolder}/build"
+    ],
+    "clangd.path": "/usr/bin/clangd",
+    "clangd.syncFileEvents": true,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.autocomplete": "disabled",
     "files.associations": {
         "iostream": "cpp",
         "cctype": "cpp",

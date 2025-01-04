@@ -33,3 +33,22 @@
   - `C++17`：完全支持，并且是 GCC 11 到 13 版本的默认模式
   - `C++20`：支持大部分特性
   - `C++23`：支持一些特性，但标准仍在开发中
+# 3 使用clangd进行代码补全
+
+在Ubuntu 24.04中，在VSCode中实现clangd的步骤如下：
+
+- `sudo apt install clangd`:安装clangd服务器
+- `clangd`：打开VSCode，安装插件clangd
+- `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)`:在`CMakeLists.txt`添加该变量，生成 `compile_commands.json`文件
+- `--compile-commands-dir=${workspaceFolder}/build`:打开VSCode的设置（Settings），搜索“clangd: arguments”。
+
+        "clangd.arguments": [
+          "--background-index",
+          "--log=error",
+          "--header-insertion=never",
+          "--clang-tidy",
+          "--cross-file-rename=true",
+          "--compile-commands-dir=${workspaceFolder}/build"
+        ],
+
+- 打开您的C/C++项目目录，clangd将自动读取compile_commands.json文件并提供代码补全、错误检测等功能。如果您遇到任何问题，可以检查clangd的日志以获取更多信息

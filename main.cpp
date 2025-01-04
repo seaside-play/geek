@@ -10,5 +10,5 @@ int main(int argc, char** argv) {
     cpp17::Demo cpp17_demo;
     cpp17_demo.Test();
 
-    return 1;
+    return 0;
 }
