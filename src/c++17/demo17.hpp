@@ -1,9 +1,8 @@
 #ifndef TRAIN_CPP_17_DEMO_H_
 #define TRAIN_CPP_17_DEMO_H_
-
 namespace cpp17 {
 
-class Demo {
+class Demo17 {
  public:
   void Test();
 
