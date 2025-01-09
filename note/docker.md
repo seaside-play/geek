@@ -1,4 +1,5 @@
-[1 如何拉取docker](#-1-如何拉取docker)
+[1 如何拉取docker](#-1-如何拉取docker)  
+[5 如何使用Vscode远程打开docker容器中的工程](#-5-如何使用Vscode远程打开docker容器中的工程)
 
 # 1 如何拉取docker
 
@@ -187,3 +188,20 @@ sh
 
 - `docker build -t my-image-name .`: 构建Docker镜像：
 - `docker run -it my-image-name /bin/bash`: 使用构建的镜像运行容器
+
+# 5 如何在ubuntu中使用VSCode访问容器中的C++工程
+
+## 5.1 使用VS Code访问容器中C++代码的推荐方式
+
+remote-development 是最适合用于连接Docker容器进行C++开发的扩展。它提供了以下优势：
+
+- 直接连接容器： 可以直接连接到运行中的Docker容器，无需额外的配置。
+- 丰富的功能： 支持远程调试、代码补全、Git集成等功能。
+- 自定义配置： 可以通过.devcontainer.json文件自定义开发环境。
+- 跨平台： 支持Windows、macOS和Linux。
+
+## 5.2 具体操作步骤
+
+- 安装如下扩展 
+  - Remote Development: 
+  - Dev Containers :
