@@ -4,9 +4,14 @@
 
 在Ubuntu系统中，snapd 的 seed 信息通常存储在 /var/lib/snapd/seed 目录下。
 
-# 2 tar.bz2
+# 2 tar压缩和解压
 
+- tar -cjvf filename.tar.bz2 -C 创建临时目录 具体要压缩的目录
 - tar -xjvf filename.tar.bz2
+
+- tar -czvf filename.tar.gz -C 创建临时目录 具体要压缩的目录
+- tar -xzvf filename.tar.gz
+
 
 # 3 在Ubuntu上访问另一个台Ubuntu系统
 
@@ -25,3 +30,8 @@ ubuntu下如何创建ae用于，并拥有root权限？
 - `su - ae`：切换到ae用户 
   - `-`： 这个选项表示切换到新用户的主目录，并加载其环境变量。
   - `ae`: 是你想要切换到的用户名。
+
+
+# 5 snap包瘦身
+
+- gnome-shell --version
