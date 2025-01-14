@@ -33,6 +33,8 @@ image就像是光盘，container就是一个已安装的系统
   - `sudo docker ps -a`: 查看历史的所有容器
   - `docker start container_name_or_id`: 启动容器
   - `docker exec -it container_name /bin/bash`: 启动容器之后，以交互的方式进入容器
+- 停止容器
+  - `docker stop container_name_or_id`: 停止容器 
 
 
 
