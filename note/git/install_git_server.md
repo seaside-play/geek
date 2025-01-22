@@ -113,26 +113,26 @@ Git 服务端的配置没有允许对 /srv/git/test.git 这个仓库的访问。
   - 确保 Git 服务端的配置文件正确，通常 Git 服务端使用 git-daemon 运行时，其配置文件 /etc/default/git-daemon 应该包含以下内容或类似内容：
 
 
-      # Defaults for git-daemon initscript
-      # sourced by /etc/init.d/git-daemon
+          # Defaults for git-daemon initscript
+          # sourced by /etc/init.d/git-daemon
 
-      # start Git daemon?
-      GIT_DAEMON_START=true
+          # start Git daemon?
+          GIT_DAEMON_START=true
 
-      # user to run it as
-      GIT_DAEMON_USER=git
+          # user to run it as
+          GIT_DAEMON_USER=git
 
-      # where to store the pid file
-      GIT_DAEMON_PIDFILE=/var/run/git-daemon.pid
+          # where to store the pid file
+          GIT_DAEMON_PIDFILE=/var/run/git-daemon.pid
 
-      # where to find repositories to export
-      GIT_DAEMON_DIRECTORY=/srv/git
+          # where to find repositories to export
+          GIT_DAEMON_DIRECTORY=/srv/git
 
-      # what port to listen on
-      GIT_DAEMON_PORT=9418
+          # what port to listen on
+          GIT_DAEMON_PORT=9418
 
-      # what extra args to pass to git daemon
-      GIT_DAEMON_ARGS="--syslog --inetd --export-all --base-path=/srv/git"
+          # what extra args to pass to git daemon
+          GIT_DAEMON_ARGS="--syslog --inetd --export-all --base-path=/srv/git"
 
 你可以使用 `sudo nano /etc/default/git-daemon` 编辑该文件，确保 `GIT_DAEMON_START=true` 和 `GIT_DAEMON_ARGS` 中包含 `--export-all` 选项，这样可以确保服务端导出 `/srv/git` 目录下的所有仓库。
 如果你只想导出 `test.git` 仓库，可以将 `--export-all` 替换为 `--export=/srv/git/test.git`，但使用 `--export-all` 更方便管理多个仓库。
@@ -149,3 +149,52 @@ bash
 确保目录和文件的权限允许 Git 服务端进程访问，你可以使用以下命令设置权限：
 
   - `sudo chmod -R 755 /srv/git/test.git`
+
+
+## 2.3 结合2.1和2.2最终的配置内容
+
+
+      # Defaults for git-daemon initscript
+      # sourced by /etc/init.d/git-daemon
+      # installed at /etc/default/git-daemon by the maintainer scripts
+
+      #
+      # This is a POSIX shell fragment
+      #
+
+      #2025014. Chaojiang Wu 修改配置
+      #GIT_DAEMON_ENABLE=false
+      GIT_DAEMON_ENABLE=true
+
+      GIT_DAEMON_START=true
+
+      #GIT_DAEMON_USER=gitdaemon
+      GIT_DAEMON_USER=git
+
+      # where to store the pid file
+      GIT_DAEMON_PIDFILE=/srv/run/git-daemon.pid
+
+      #GIT_DAEMON_BASE_PATH=/var/lib
+      GIT_DAEMON_BASE_PATH=/srv/git
+
+      #GIT_DAEMON_DIRECTORY=/var/lib/git
+      GIT_DAEMON_DIRECTORY=/srv/git
+
+      # what port to listen on 
+      GIT_DAEMON_PORT=9418
+
+      # what extra args to pass to git daemon
+      GIT_DAMEON_ARGS="--syslog --inetd --export-all"
+
+      #20250114. Chaojiang Wu End
+
+
+      # Additional options that are passed to the Daemon.
+      GIT_DAEMON_OPTIONS=""
+
+
+# 3 如何让别的电脑也可以访问
+
+1. 需要在同一个局域网内，目前通过有线网接入，ip地址为`10.20.210.154`
+2. 可提供的git服务端的ip地址为：`git clone git://10.20.210.154/srv/git/test.git`
+3. 密码为`HelloGit`
